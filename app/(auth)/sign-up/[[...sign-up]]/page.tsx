@@ -1,3 +1,4 @@
+// This is SignUp Page
 import { SignUp } from '@clerk/nextjs';
 
 export default function SignUpPage() {
@@ -13,7 +14,8 @@ export default function SignUpPage() {
           <p className="text-blue-200 mt-1 text-sm">Start your 14-day free trial — no card required</p>
         </div>
 
-        {/* Clerk Sign Up */}
+        {/* Clerk Sign Up    
+        MKC*/}
         <div className="flex justify-center">
           <SignUp
             appearance={{
