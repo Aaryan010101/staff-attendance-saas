@@ -9,6 +9,7 @@ import {
   DollarSign,
   Settings,
 } from 'lucide-react';
+/* new value change */
 
 const navItems = [
   { href: '/dashboard',   icon: LayoutDashboard, label: 'Home' },
@@ -20,7 +21,6 @@ const navItems = [
 
 export function BottomNav() {
   const pathname = usePathname();
-
   return (
     <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 safe-area-pb">
       <div className="flex items-stretch">
