@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 import { Header } from '@/components/ui/Header';
@@ -49,8 +49,8 @@ export function SalaryClient({ initialRecords, initialMonth }: SalaryClientProps
   const [generatingPdf, setGeneratingPdf] = useState<string | null>(null);
 
   const fetchRecords = useCallback(async () => {
-    if (month === initialMonth && records === initialRecords) return;
-    
+    // Only fetch if month changed from what was initially loaded
+    // Since we have initialRecords, we don't need to fetch on the first render for initialMonth
     setLoading(true);
     try {
       const res = await fetch(`/api/salary?month=${month}`);
@@ -61,9 +61,17 @@ export function SalaryClient({ initialRecords, initialMonth }: SalaryClientProps
     } finally {
       setLoading(false);
     }
-  }, [month, initialMonth, records, initialRecords]);
+  }, [month]);
 
-  useEffect(() => { fetchRecords(); }, [fetchRecords]);
+  const isInitialMount = useRef(true);
+
+  useEffect(() => { 
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    fetchRecords(); 
+  }, [month, fetchRecords]);
 
   const handleCalculateAll = async () => {
     setCalculating(true);

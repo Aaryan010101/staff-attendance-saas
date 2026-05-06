@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
 
   let query = supabaseAdmin
     .from('advances')
-    .select('*, staff(name, role)')
+    .select('id, staff_id, amount, given_date, month_to_deduct, is_deducted, staff(name, role)')
     .in('staff_id', staffIds)
     .order('given_date', { ascending: false });
 

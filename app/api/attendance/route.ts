@@ -21,7 +21,7 @@ export async function GET(req: Request) {
 
   let query = supabaseAdmin
     .from('attendance')
-    .select('*')
+    .select('id, staff_id, date, status, note')
     .in('staff_id', staffIds);
 
   if (date) query = query.eq('date', date);
