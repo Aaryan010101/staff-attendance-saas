@@ -29,8 +29,22 @@ export const getStaffIdsForBusiness = cache(async (businessId: string) => {
 // Returns { business, staffIds } in a single call chain, or null if not found.
 
 export async function getBusinessContext(userId: string) {
-  const business = await getBusinessForUser(userId);
-  if (!business) return null;
-  const staffIds = await getStaffIdsForBusiness(business.id);
-  return { business, staffIds };
+  // Parallelize business data and staff IDs lookup in a single query
+  const { data, error } = await supabaseAdmin
+    .from('businesses')
+    .select('id, name, plan, logo_url, staff(id)')
+    .eq('owner_id', userId)
+    .maybeSingle();
+
+  if (!data) return null;
+
+  return {
+    business: {
+      id: data.id,
+      name: data.name,
+      plan: data.plan as any,
+      logo_url: data.logo_url
+    },
+    staffIds: (data.staff as any[] ?? []).map(s => s.id)
+  };
 }

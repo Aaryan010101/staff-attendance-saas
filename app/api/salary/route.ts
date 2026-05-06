@@ -106,7 +106,7 @@ export async function GET(req: NextRequest) {
 
   let query = supabaseAdmin
     .from('salary_records')
-    .select('*, staff(name, role, phone, salary_type, monthly_salary, daily_wage)')
+    .select('id, staff_id, month, total_days, present_days, base_salary, advance_deduction, overtime_amount, bonus, final_salary, is_paid, paid_date, slip_url, staff(name, role, phone, salary_type, monthly_salary, daily_wage)')
     .in('staff_id', staffIds)
     .order('month', { ascending: false });
 

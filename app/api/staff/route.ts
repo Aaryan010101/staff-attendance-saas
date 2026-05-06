@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
   let query = supabaseAdmin
     .from('staff')
-    .select('*')
+    .select('id, name, role, salary_type, monthly_salary, daily_wage, phone')
     .eq('business_id', business.id)
     .order('name');
 

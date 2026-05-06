@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 import { Save, CheckCheck, Loader2, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -37,9 +37,14 @@ export function AttendanceClient({ initialStaff, initialAttendance, initialDate 
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
+  const isInitialMount = useRef(true);
+
   // Fetch attendance whenever date changes
   useEffect(() => {
-    if (selectedDate === initialDate && staffList === initialStaff) return;
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     
     setLoading(true);
     fetch(`/api/attendance?date=${selectedDate}`)
@@ -51,7 +56,7 @@ export function AttendanceClient({ initialStaff, initialAttendance, initialDate 
       })
       .catch(() => toast.error('Failed to load attendance'))
       .finally(() => setLoading(false));
-  }, [selectedDate, initialDate, initialStaff, staffList]);
+  }, [selectedDate]);
 
   const setStatus = (staffId: string, status: AttendanceStatus) => {
     setAttendance((prev) => new Map(prev).set(staffId, status));

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { format, eachDayOfInterval, startOfMonth, endOfMonth } from 'date-fns';
 import toast from 'react-hot-toast';
 import { Header } from '@/components/ui/Header';
@@ -46,8 +46,6 @@ export function ReportsClient({ initialStaff, initialAttendance, initialSalary, 
   const [exporting, setExporting] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (month === initialMonth && staffList === initialStaff && attendance === initialAttendance && salaryRecords === initialSalary) return;
-    
     setLoading(true);
     try {
       const [staffRes, attRes, salRes] = await Promise.all([
@@ -66,9 +64,17 @@ export function ReportsClient({ initialStaff, initialAttendance, initialSalary, 
     } finally {
       setLoading(false);
     }
-  }, [month, initialMonth, initialStaff, initialAttendance, initialSalary, staffList, attendance, salaryRecords]);
+  }, [month]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  const isInitialMount = useRef(true);
+
+  useEffect(() => { 
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    fetchData(); 
+  }, [month, fetchData]);
 
   const monthStart = startOfMonth(new Date(month + '-01'));
   const monthEnd = endOfMonth(new Date(month + '-01'));

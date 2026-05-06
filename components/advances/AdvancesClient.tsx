@@ -56,9 +56,10 @@ export function AdvancesClient({ initialAdvances, initialStaff }: AdvancesClient
   }, [filterMonth]);
 
   useEffect(() => {
-    if (filterMonth) fetchData();
-    else if (!initialAdvances.length && !advances.length) fetchData();
-  }, [filterMonth, fetchData, initialAdvances.length, advances.length]);
+    if (filterMonth) {
+      fetchData();
+    }
+  }, [filterMonth, fetchData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
