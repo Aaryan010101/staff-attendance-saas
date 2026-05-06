@@ -19,7 +19,7 @@ interface AttendanceRecord {
   date: string;
   status: AttendanceStatus;
 }
-
+//new value are added check that 
 interface AttendanceClientProps {
   initialStaff: Staff[];
   initialAttendance: AttendanceRecord[];
