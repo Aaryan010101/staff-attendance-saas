@@ -36,7 +36,7 @@ export function StaffCard({ staff }: StaffCardProps) {
     <Link href={`/staff/${staff.id}`} className="block">
       <div className="card hover:shadow-md hover:border-brand-blue/20 transition-all duration-200 active:scale-[0.99]">
         <div className="flex items-center gap-3">
-          {/* Avatar */}
+          {/* Avatar new value added  */}
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue to-brand-blue-light flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm">
             {initials}
           </div>
