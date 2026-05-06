@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-blue: #1A56A0;
+  --brand-blue-dark: #163f7a;
+  --brand-blue-light: #2a70cc;
+  --success: #1D9E75;
+  --danger: #E24B4A;
+  --warning: #EF9F27;
+  --surface: #F5F5F5;
+  --foreground: #111827;
+  --muted: #6B7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--surface);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Utility Classes ──────────────── */
+
+.btn-primary {
+  @apply bg-brand-blue text-white font-semibold rounded-xl px-5 py-3 min-h-[44px] min-w-[44px]
+         transition-all duration-200 hover:bg-brand-blue-dark active:scale-95
+         focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply bg-white text-brand-blue font-semibold rounded-xl px-5 py-3 min-h-[44px] min-w-[44px]
+         border-2 border-brand-blue transition-all duration-200 hover:bg-blue-50 active:scale-95
+         focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2;
+}
+
+.btn-danger {
+  @apply bg-danger text-white font-semibold rounded-xl px-5 py-3 min-h-[44px] min-w-[44px]
+         transition-all duration-200 hover:bg-red-700 active:scale-95
+         focus:outline-none focus:ring-2 focus:ring-danger focus:ring-offset-2;
+}
+
+.btn-ghost {
+  @apply text-gray-600 font-medium rounded-xl px-4 py-2.5 min-h-[44px]
+         transition-all duration-200 hover:bg-gray-100 active:scale-95
+         focus:outline-none focus:ring-2 focus:ring-gray-300;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-4;
+}
+
+.input-field {
+  @apply w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm
+         focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent
+         placeholder:text-gray-400 transition-all duration-200 min-h-[44px];
+}
+
+.label {
+  @apply block text-sm font-medium text-gray-700 mb-1.5;
+}
+
+.badge-present {
+  @apply inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full;
+}
+
+.badge-absent {
+  @apply inline-flex items-center gap-1 bg-red-100 text-red-600 text-xs font-semibold px-2.5 py-1 rounded-full;
+}
+
+.badge-halfday {
+  @apply inline-flex items-center gap-1 bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-1 rounded-full;
+}
+
+.badge-active {
+  @apply inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full;
+}
+
+.badge-inactive {
+  @apply inline-flex items-center gap-1 bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full;
+}
+
+/* ─── Page Transitions ─────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: fadeInUp 0.25s ease-out;
+}
+
+/* ─── Scrollbar ────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
