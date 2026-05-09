@@ -173,10 +173,11 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
-  netAmount: {
+netAmount: {
     color: '#ffffff',
     fontSize: 22,
     fontFamily: 'Helvetica-Bold',
+  
   },
   // Footer
   footer: {
